@@ -112,7 +112,19 @@ if($partesRuta[0]==''){
 	}
 
 }else if($partesRuta[0]=='apa'){
-	$rutaElegida="api/photos/showall.php";
+	$rutaElegida="";
+	//$rutaElegida="api/photos/showall.php";
+	//echo "-->".$partesRuta[1];
+	//if(count($partesRuta)==1){
+		//echo "has entrado en la 2 parte";
+		if($partesRuta[1]=='showcreator'){
+			//require_once( "app/RepositorioFotos.php" );
+			$rutaElegida='api/photos/showcreator.php';
+			//echo "has entrado en 2 parte";
+		}else{
+			echo 'Ruta mala em 2 parte';
+		}
+	//}
 
 }else if($partesRuta[0]=='carrusel'){
 	$rutaElegida='views/photos/carrusel.php';

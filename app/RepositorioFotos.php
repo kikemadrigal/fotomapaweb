@@ -43,6 +43,7 @@ class RepositorioFotos {
 		}
 		return $creador;
 	}
+	
 	//Obtener un array de objetos foto con todas las fotos
 	public static function getAll( $conexion ) {
 		$fotos = array();
