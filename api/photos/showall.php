@@ -10,7 +10,7 @@ require_once( "app/ObtenerUsuario.php" );
 Conexion::abrir_conexion();
 $conexion = Conexion::obtener_conexion();
 
-$array = RepositorioFotos::getAll( $conexion );
+$array = RepositorioFotos::getAllAPI( $conexion,1000 );
 
 echo json_encode($array);
 //echo var_dump($array);

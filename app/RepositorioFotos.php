@@ -117,6 +117,21 @@ class RepositorioFotos {
 		}
 		return $fotos;
 	}
+	public static function getAllAPI( $conexion, $maxMarkers ) {
+		if ( isset( $conexion ) ) {
+			try {
+				require_once( "Foto.php" );
+				$sql = "SELECT * FROM fotos LIMIT ".$maxMarkers;
+				$sentencia = $conexion->prepare( $sql );
+				$sentencia->execute();
+				$resultado = $sentencia->fetchAll();
+				
+				return $resultado;
+			} catch ( PDOException $ex ) {
+				print( "Error: " . $ex->getMessage() );
+			}
+		}
+	}
 	public static function getWithName( $conexion,$name ) {
 		$foto=null;
 		$fotos=array();

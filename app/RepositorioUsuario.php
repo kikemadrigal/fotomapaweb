@@ -227,6 +227,21 @@ class RepositorioUsuario {
 		}
 		return $total;
 	}
+	public static function getAllAPI($conexion) {
+		
+		if ( isset( $conexion ) ) {
+			try {
+				$sql = "SELECT * FROM usuarios";
+				$sentencia = $conexion->prepare( $sql );
+				$sentencia->execute();
+				$resultado=$sentencia->fetch();
+				return $resultado;
+			} catch ( PDOException $ex ) {
+				print( "Error: " . $ex->getMessage() );
+			}
+		}
+	
+	}
 	/******Fin de select***************/
 	/******************UPDATE*************************/
 	public static function actualizarClaveUsuario($conexion, $idUsuario, $nuevaClave){

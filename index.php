@@ -110,19 +110,34 @@ if($partesRuta[0]==''){
 		}
 		
 	}
-
-}else if($partesRuta[0]=='apa'){
+//http://fotomapa.es/api
+}else if($partesRuta[0]=='api'){
 	$rutaElegida="";
 	//$rutaElegida="api/photos/showall.php";
 	//echo "-->".$partesRuta[1];
 	//if(count($partesRuta)==1){
 		//echo "has entrado en la 2 parte";
-		if($partesRuta[1]=='showcreator'){
-			//require_once( "app/RepositorioFotos.php" );
-			$rutaElegida='api/photos/showcreator.php';
-			//echo "has entrado en 2 parte";
-		}else{
-			echo 'Ruta mala em 2 parte';
+		//https://fotomapa.es/api/usuario/showall
+		if($partesRuta[1]=='usuario'){
+			require_once( "app/config.php" );
+			require_once( "app/Conexion.php" );
+			require_once( "app/ControlSesion.php" );
+			require_once( "app/RepositorioUsuario.php" );
+			require_once( "app/ObtenerUsuario.php" );
+			if($partesRuta[2]=='showall'){
+				$rutaElegida='api/user/showall.php';
+			}
+		}else if($partesRuta[1]=='photo'){
+			if($partesRuta[2]=='showcreator'){
+				$rutaElegida='api/photos/showcreator.php';
+			}else if($partesRuta[2]=='showall'){
+				//echo "Entra";
+				$rutaElegida='api/photos/showall.php';
+			}
+		}else if($partesRuta[1]=='map'){
+			echo 'map';
+		}else if($partesRuta[1]=='location'){
+			echo 'location';
 		}
 	//}
 
