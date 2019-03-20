@@ -25,6 +25,20 @@ class RepositorioFotos {
 		}
 		return $foto;
 	}
+	public static function showAPI( $conexion,$id ) {
+		if ( isset( $conexion ) ) {
+			try {
+				$sql = "SELECT * FROM fotos WHERE id=:id LIMIT 1";
+				$sentencia=$conexion->prepare($sql);
+				$sentencia->bindParam(':id',$id,PDO::PARAM_INT);
+				$sentencia->execute();
+				$linea=$sentencia->fetch();
+				return $linea;
+			} catch ( PDOException $ex ) {
+				print( "Error: " . $ex->getMessage() );
+			}
+		}
+	}
 	public static function obtenerCreadorDeFotoConId($conexion,$id){
 		$creador = '';
 		if ( isset( $conexion ) ) {

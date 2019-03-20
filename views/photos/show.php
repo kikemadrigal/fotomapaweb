@@ -1,15 +1,14 @@
 
 <?php
-//Para las rutas
-require_once("app/config.php");
-//Necesitamos una conexión a la base de datos
-require_once("app/Conexion.php");
+require_once( "app/config.php" );
+require_once( "app/Conexion.php" );
 require_once( "app/ControlSesion.php" );
-//Necesitamos trabajar con el modelo Fotos
 require_once("app/RepositorioFotos.php");
 //Necesitamos la clase Foto
 require_once("app/Foto.php");
-require_once('app/ObtenerUsuario.php');
+require_once( "app/RepositorioUsuario.php" );
+require_once( "app/ObtenerUsuario.php" );
+
 if(!isset($idFoto)){
 	echo "<script type='text/javascript'>location.href='http://fotomurcia.tipolisto.es'</script>";
 } 

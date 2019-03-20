@@ -234,7 +234,7 @@ class RepositorioUsuario {
 				$sql = "SELECT * FROM usuarios";
 				$sentencia = $conexion->prepare( $sql );
 				$sentencia->execute();
-				$resultado=$sentencia->fetch();
+				$resultado=$sentencia->fetchAll();
 				return $resultado;
 			} catch ( PDOException $ex ) {
 				print( "Error: " . $ex->getMessage() );

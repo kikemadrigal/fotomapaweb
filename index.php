@@ -110,36 +110,74 @@ if($partesRuta[0]==''){
 		}
 		
 	}
+
+
+
+/**
+ * API
+ */
+
+
 //http://fotomapa.es/api
 }else if($partesRuta[0]=='api'){
 	$rutaElegida="";
-	//$rutaElegida="api/photos/showall.php";
-	//echo "-->".$partesRuta[1];
-	//if(count($partesRuta)==1){
-		//echo "has entrado en la 2 parte";
-		//https://fotomapa.es/api/usuario/showall
-		if($partesRuta[1]=='usuario'){
-			require_once( "app/config.php" );
-			require_once( "app/Conexion.php" );
-			require_once( "app/ControlSesion.php" );
-			require_once( "app/RepositorioUsuario.php" );
-			require_once( "app/ObtenerUsuario.php" );
-			if($partesRuta[2]=='showall'){
-				$rutaElegida='api/user/showall.php';
-			}
-		}else if($partesRuta[1]=='photo'){
-			if($partesRuta[2]=='showcreator'){
-				$rutaElegida='api/photos/showcreator.php';
-			}else if($partesRuta[2]=='showall'){
-				//echo "Entra";
-				$rutaElegida='api/photos/showall.php';
-			}
-		}else if($partesRuta[1]=='map'){
-			echo 'map';
-		}else if($partesRuta[1]=='location'){
-			echo 'location';
+	require_once( "app/config.php" );
+	require_once( "app/Conexion.php" );
+	require_once( "app/ControlSesion.php" );
+
+
+
+
+	if($partesRuta[1]=='usuario'){
+		require_once( "app/ValidacionesFormularioLoginUsuario.php" );
+		require_once( "app/RepositorioUsuario.php" );
+		require_once( "app/RepositorioUserMessages.php");
+		require_once( "app/Usuario.php" );
+		require_once( "app/ControlSesion.php" );
+		if($partesRuta[2]=='showall'){
+			$rutaElegida='api/user/showall.php';
+		}else if($partesRuta[2]=='login'){
+		
+			$rutaElegida='api/user/login.php';
 		}
-	//}
+	}
+	
+	
+	
+	else if($partesRuta[1]=='photo'){
+		require_once( "app/RepositorioFotos.php" );
+		require_once("app/Foto.php");
+		if($partesRuta[2]=='showcreator'){
+			$rutaElegida='api/photos/showcreator.php';
+		}else if($partesRuta[2]=='showall'){
+			$rutaElegida='api/photos/showall.php';
+		}else if($partesRuta[2]=='show'){
+			//ECHO "HOLA DESDE SHOW-->".$partesRuta[3]; 
+			$idFoto=$partesRuta[3];
+			$rutaElegida='api/photos/show.php';
+		}else{
+			echo "<h3>Ruta photo mala: ".$partesRuta."</h3>";
+		}
+	}
+	
+	
+	
+	
+	else if($partesRuta[1]=='map'){
+		echo 'map';
+	}else if($partesRuta[1]=='location'){
+		echo 'location';
+	}
+
+
+
+
+
+
+
+
+
+
 
 }else if($partesRuta[0]=='carrusel'){
 	$rutaElegida='views/photos/carrusel.php';

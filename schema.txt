@@ -1,6 +1,6 @@
 Base de datos
 db718799277
-Descripción
+Descripciï¿½n
 fotomurcia
 
 Nombre de host
@@ -10,7 +10,7 @@ Puerto
 3306
 Nombre de usuario
 dbo718799277
-Tipo y versión
+Tipo y versiï¿½n
 MySQL 5.5
 Almacenamiento
 Configurando
@@ -49,3 +49,24 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci AUTO_INCREMENT=47 ;
 /***********************************************************/
 
+
+tabla usuarios de fotomapa.EXISTS
+CREATE TABLE `usuarios` (
+  `id` int(6) NOT NULL,
+  `nombre` varchar(50) COLLATE latin1_spanish_ci NOT NULL,
+  `clave` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `tipo` varchar(50) COLLATE latin1_spanish_ci NOT NULL,
+  `correo` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `nombrereal` varchar(100) COLLATE latin1_spanish_ci NOT NULL,
+  `apellidos` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `web` varchar(100) COLLATE latin1_spanish_ci NOT NULL,
+  `validado` smallint(2) NOT NULL DEFAULT '0',
+  `contador` int(100) NOT NULL,
+  `fecha` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `datos` longtext COLLATE latin1_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+INSERT INTO `usuarios` (`id`, `nombre`, `clave`, `tipo`, `correo`, `nombrereal`, `apellidos`, `web`, `validado`, `contador`, `fecha`, `datos`) VALUES
+(21, 'kike', '$2y$10$4b5gQSfMXoMsXN3G0gwkTuX5d2KaTeFMiPhxpqWmXkc59Od5uWeNy', 'usuario', 'kikemadrigal@hotmail.com', 'nada', 'nada', 'nada', 0, 0, '2018-04-20 16:43:37', ''),
+(22, 'IP:31.4.204.197', '$2y$10$FuMnA/6FvbyxLxZ.nT6HsuOJiDachHfiWFaIpTdNh82F01ivTcfxO', 'usuariosinregistrar', '', '', '', '', 0, 0, '2018-04-28 18:09:19', ''),
+(25, 'IP:31.4.204.208', '$2y$10$KMVeXiEFBJJEO6r5cZVbMOYkgii68Yxc/bOmSXWiCsI3GJwAlPMzO', 'usuariosinregistrar', '', '', '', '', 0, 0, '2018-05-27 20:33:38', '');
