@@ -11,7 +11,9 @@ else $titulo .= " - ".APP_NAME;
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Bootstrap CSS -->
 	<!--4.0-->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+	<!--	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">-->
+	<!--bootstrap4.3-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<!--Agregamos m is estilos-->
 	<link rel="stylesheet" href="<?php echo RUTA_CSS_HTTPS ?>/miestilo.css">
 	<!--Agregamos css Font awesome para los iconos-->
@@ -40,7 +42,7 @@ else $titulo .= " - ".APP_NAME;
 	</script>
 </head>
 <body>
-<p><h1>Hola</h1></p>
+
 	<div class="container">
 		<?php 
 	  	//Mensajes de otras páginas por get

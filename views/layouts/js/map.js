@@ -175,14 +175,84 @@ var theMaximumPhotosHaveChanged=function(maxMarkers){
 	cargarfotos(maxMarkers);
 }
 	 
+
+var selectHaCambiadoElTipoDeMapa=function(typeMap){
+	//Creamos el mapa del usuario
+	console.log('estas dentro de se ha cambiado el tipo de mapa'+typeMap);
+	$.ajax({
+		type: 'GET',
+		url: 'https://www.fotomapa.es/views/map/ajax-mapConfigure-updateTypeMap.php?typeMap='+typeMap
+	}).done(function(info){
+		document.getElementById("datosMapa").innerHTML="Tipo de mapa cambiado: "+typeMap;
+		switch(typeMap) {
+		    case 'roadmap':
+		        map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+		        break;
+		    case 'satellite':
+		         map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+		        break;
+		    case 'hybrid':
+		         map.setMapTypeId(google.maps.MapTypeId.HYBRID);
+		        break;
+		    case 'terrain':
+		         map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
+		        break;
+		    default:
+		         map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+		}
+	});
+}
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * 
+ * 
+ * 
+ * 
+ *Eventos
+ * 
+ * 
+ * 
+ */
+
+
+
+
+
+
+
+
+
 var cargarEventos=function(){
 	google.maps.event.addListener(map, "click", function(evento) {
-		console.log('Has hecho click en crear nueva foto');	
+		//console.log('Has hecho click en crear nueva foto');	
 		//Puedo unirlas en una unica variable si asi lo prefiero
 		lat = evento.latLng.lat();
 		lng = evento.latLng.lng();
 		document.getElementById("muestracoordenadas").innerHTML=lat+", "+lng;
-		$('#modalNewPhotos').modal('toggle');
+		$.ajax({
+			type: 'GET',
+			url: 'https://www.fotomapa.es/views/user/ajax_check_registered_user.php'
+		}).done(function(respuesta){
+			//console.log('La respuesta ha si esta registrao o no es: '+respuesta);
+			if(respuesta){
+				//console.log('El usuario está registrado');
+				$('#modalNewPhotos').modal('toggle');
+			}else{
+				//console.log('El usuario no está registrado');
+				alert('Es necesario estar logeado o registrado para inserta fotos');
+			}
+		});
+	
 		//var opcion = confirm("¿Agregar nueva foto?\nLas fotos de usuarios no registrado tendrán que esperar la validaciónd el administrador");
 		//if (opcion == true) {
 			//document.location="http://www.fotomapa.es/photos/create/"+lat+","+lng;
@@ -269,33 +339,5 @@ var selectHaCambiadoDeCiudad=function(location){
 			
 		}
 
-	});
-}
-
-
-var selectHaCambiadoElTipoDeMapa=function(typeMap){
-	//Creamos el mapa del usuario
-	console.log('estas dentro de se ha cambiado el tipo de mapa'+typeMap);
-	$.ajax({
-		type: 'GET',
-		url: 'https://www.fotomapa.es/views/map/ajax-mapConfigure-updateTypeMap.php?typeMap='+typeMap
-	}).done(function(info){
-		document.getElementById("datosMapa").innerHTML="Tipo de mapa cambiado: "+typeMap;
-		switch(typeMap) {
-		    case 'roadmap':
-		        map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
-		        break;
-		    case 'satellite':
-		         map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
-		        break;
-		    case 'hybrid':
-		         map.setMapTypeId(google.maps.MapTypeId.HYBRID);
-		        break;
-		    case 'terrain':
-		         map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
-		        break;
-		    default:
-		         map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
-		}
 	});
 }

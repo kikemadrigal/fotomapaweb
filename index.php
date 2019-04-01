@@ -1,5 +1,5 @@
 <?php
-
+session_start();//Obligatorio para trabajar con sesiones
 $componentes_url=parse_url($_SERVER['REQUEST_URI']);
 $ruta=$componentes_url['path'];
 $partesRuta=explode("/", $ruta);
@@ -8,6 +8,18 @@ $partesRuta=array_slice($partesRuta,0);
 $rutaElegida='views/404.php';
 //echo "<p>".$ruta."</p>";
 //echo "REQUEST_URI--->".print_r($partesRuta);
+/**
+ * Archivos obligatorios
+ */
+
+require_once( "app/config.php" );
+require_once( "app/Conexion.php" );
+require_once( "app/ControlSesion.php" );
+require_once( "app/ValidacionesFormularioLoginUsuario.php" );
+require_once( "app/RepositorioUsuario.php" );
+require_once( "app/RepositorioUserMessages.php");
+require_once( "app/Usuario.php" );
+require_once( "app/ObtenerUsuario.php" ); 
 
 if($partesRuta[0]==''){ 
 	$rutaElegida='views/photos/home.php';
@@ -120,25 +132,15 @@ if($partesRuta[0]==''){
 
 //http://fotomapa.es/api
 }else if($partesRuta[0]=='api'){
-	$rutaElegida="";
-	require_once( "app/config.php" );
-	require_once( "app/Conexion.php" );
-	require_once( "app/ControlSesion.php" );
-
-
-
-
 	if($partesRuta[1]=='usuario'){
-		require_once( "app/ValidacionesFormularioLoginUsuario.php" );
-		require_once( "app/RepositorioUsuario.php" );
-		require_once( "app/RepositorioUserMessages.php");
-		require_once( "app/Usuario.php" );
-		require_once( "app/ControlSesion.php" );
 		if($partesRuta[2]=='showall'){
 			$rutaElegida='api/user/showall.php';
 		}else if($partesRuta[2]=='login'){
 		
 			$rutaElegida='api/user/login.php';
+		}else if($partesRuta[2]=='create'){
+		
+			$rutaElegida='api/user/create.php';
 		}
 	}
 	
@@ -155,8 +157,12 @@ if($partesRuta[0]==''){
 			//ECHO "HOLA DESDE SHOW-->".$partesRuta[3]; 
 			$idFoto=$partesRuta[3];
 			$rutaElegida='api/photos/show.php';
+		}else if($partesRuta[2]=='create'){
+			//ECHO "HOLA DESDE SHOW-->".$partesRuta[3]; 
+			//$idFoto=$partesRuta[3];
+			$rutaElegida='api/photos/create.php';
 		}else{
-			echo "<h3>Ruta photo mala: ".$partesRuta."</h3>";
+			echo "<h3>Ruta photo mala: ".$partesRuta[0]."/".$partesRuta[1]."/".$partesRuta[2]."</h3>";
 		}
 	}
 	
@@ -179,6 +185,10 @@ if($partesRuta[0]==''){
 
 
 
+
+
+
+
 }else if($partesRuta[0]=='carrusel'){
 	$rutaElegida='views/photos/carrusel.php';
 }else if($partesRuta[0]=='map'){
@@ -188,7 +198,11 @@ if($partesRuta[0]==''){
 		$mensaje=$_GET['mensaje'];
 		$rutaElegida='views/map/map.php';
 	}
-}else if($partesRuta[0]=='mapuser'){
+}
+
+
+
+else if($partesRuta[0]=='mapuser'){
 	$rutaElegida='views/map/mapuser2.php';
 }else if($partesRuta[0]=='search'){
 	$rutaElegida='views/photo/showall.php';

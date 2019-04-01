@@ -38,7 +38,7 @@ class ControlSesion{
 	
 	public static function getIdUsuario($conexion){
 		$idUsuario=null;
-		require_once('RepositorioUsuario.php');
+		//require_once('RepositorioUsuario.php');
 		if ( ControlSesion::comprobar_sesion_iniciada() ) {
 			$nombreUsuario = $_SESSION[ 'nombre' ];
 		} else {
@@ -64,7 +64,8 @@ class ControlSesion{
 		if ( ControlSesion::comprobar_sesion_iniciada() ) {
 			$nombreUsuario = $_SESSION[ 'nombre' ];
 		} else {
-			$nombreUsuario = "IP:" . $_SERVER[ 'REMOTE_ADDR' ];
+			$nombreUsuario="Sin nombre porque no has iniciado sesión";
+			//$nombreUsuario = "IP:" . $_SERVER[ 'REMOTE_ADDR' ];
 		}
 		return $nombreUsuario;
 	}

@@ -125,6 +125,68 @@ class RepositorioUsuario {
 		}
 		return $usuario;
 	}
+	public static function obtener_usuario_por_email_api($conexion,$email){
+		$usuario=null;
+		if ( isset( $conexion ) ) {
+			try {
+				$sql = "SELECT * FROM usuarios WHERE correo=:email";
+				$sentencia=$conexion->prepare($sql);
+				$sentencia->bindParam(':email',$email,PDO::PARAM_STR);
+				$sentencia->execute();
+				$resultado=$sentencia->fetch();
+				return $resultado;
+				/*if(count($resultado)){
+					$usuario=new Usuario($resultado['id'],
+										 $resultado['nombre'],
+										 $resultado['clave'],
+										 $resultado['tipo'],
+										 $resultado['correo'],
+										 $resultado['nombrereal'],
+										 $resultado['apellidos'],
+										 $resultado['web'],
+										 $resultado['validado'],
+										 $resultado['contador'],
+										 $resultado['fecha'],
+										 $resultado['datos'] );
+				}*/
+			} catch ( PDOException $ex ) {
+				print( "Error: " . $ex->getMessage() );
+			}
+		}
+		//return $usuario;
+	}
+
+	public static function obtener_usuario_por_email_api_con_objeto($conexion,$email){
+		$usuario=null;
+		if ( isset( $conexion ) ) {
+			try {
+				$sql = "SELECT * FROM usuarios WHERE correo=:email";
+				$sentencia=$conexion->prepare($sql);
+				$sentencia->bindParam(':email',$email,PDO::PARAM_STR);
+				$sentencia->execute();
+				$resultado=$sentencia->fetch();
+
+				if(count($resultado)){
+					$usuario=new Usuario($resultado['id'],
+										 $resultado['nombre'],
+										 $resultado['clave'],
+										 $resultado['tipo'],
+										 $resultado['correo'],
+										 $resultado['nombrereal'],
+										 $resultado['apellidos'],
+										 $resultado['web'],
+										 $resultado['validado'],
+										 $resultado['contador'],
+										 $resultado['fecha'],
+										 $resultado['datos'] );
+				}
+			} catch ( PDOException $ex ) {
+				print( "Error: " . $ex->getMessage() );
+			}
+		}
+		return $usuario;
+	}
+	
 	public static function obtener_id_usuario_por_nombre($conexion,$nombre){
 		$idUsuario=null;
 		if ( isset( $conexion ) ) {

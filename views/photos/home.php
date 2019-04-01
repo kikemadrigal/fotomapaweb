@@ -7,7 +7,7 @@ require_once( "app/Foto.php" );
 
 
 require_once('views/layouts/document-start.inc.php');
-echo "<div class='container'>Para poner una foto picha o toca el mapa.</div>";
+
 require_once('views/map/map.inc.php');
 echo "<br>";
 

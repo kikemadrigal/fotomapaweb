@@ -67,25 +67,60 @@
 
 
 <div class="container">
-	<div id="muestracoordenadas" style="display: inline;"></div>
-	<div style="background-color: #F9F3F9;padding: 10px">
-		<div id="dvMap" style="width: 100%; height:400px; "></div><br>
-		<a class="btn btn-outline-secondary btn-sm" id="botonPosicionActual" href="#" role="button" style="margin: 2px;"><i class="fa fa-camera"></i> Hacer foto en mi localización</a>
-		<a class="btn btn-outline-secondary btn-sm" id="botonCentrarMapa" href="#" role="button" style="margin: 2px;"><i class="fa fa-street-view"></i> Localízame</a>
+	<div class="d-flex justify-content-between">
+		<?php
+		
+		if(ControlSesion::comprobar_sesion_iniciada()){
+			echo "<div>Pincha en el mapa para insertar un foto</div>";
+		}else{
+			echo "<div>Es necesario logearte o registrarte para insertar una foto.</div>";
+		}
+		?>
+		<div id="muestracoordenadas"></div>
+	</div>
+	<div style="background-color: #F9F3F9;padding: 10px;">
+	<!-- Este es el mapa-->
+	<div id="dvMap" style="width: 100%; height:400px; "></div><br>
+
+	<!--
+	Aquí empiezan los botones que hay debajo del mapa
+	 ________	  ________     ________     ________
+	|________|   |________|   |________|   |________| 
+	-->
+
+	<?php
+	//Si el usuario ha iniciado sesión
+	if(ControlSesion::comprobar_sesion_iniciada()){
+	?>
+
+		<a class="btn btn-outline-secondary btn-sm " id="botonCentrarMapa" href="#" role="button" style="margin: 2px;" ><i class="fa fa-street-view"></i> Localízame</a>
+		<a class="btn btn-outline-secondary btn-sm " id="botonPosicionActual" href="#" role="button" style="margin: 2px;"><i class="fa fa-camera"></i> Hacer foto en mi localización</a>
 		<div class="dropdown" style="display: inline;">
-		<a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" id="menuConfiguracionDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" id="menuConfiguracionDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-pressed="true" <?php echo $estado ?>>
 				<i class="fa fa-map"></i> Configuración...
 		</a>
-		<div class="dropdown-menu" aria-labelledby="menuConfiguracionDropDown">
+		<div class="dropdown-menu " aria-labelledby="menuConfiguracionDropDown" aria-pressed="true" <?php echo $estado ?>>
 			<a class="dropdown-item" href="#modalUpdateLocation" class="btn btn-primary" data-toggle="modal"><i class="fa fa-map-marker"></i> Localización inicial</a>
 			<a class="dropdown-item" href="#modalUpdateZoom" class="btn btn-primary" data-toggle="modal" ><i class="fa fa-search-plus"></i> Zoom</a>
 			<a class="dropdown-item" href="#modalUpdateTypeMap" class="btn btn-primary" data-toggle="modal"><i class="fa fa-map"></i> Tipo de mapa</a>	
 			<a class="dropdown-item" href="#modalUpdateMaxMarkers" class="btn btn-primary" data-toggle="modal"><i class="fa fa-plus"></i> Fotos máximas a ver.</a>	
 			<a class="dropdown-item" href="#modalConfirmDeleteUserAndMap"  class="btn btn-primary" data-toggle="modal"><i class="fa fa-trash"></i> Borrar mis datos</a>	
 		</div>
-	</div>
-		<div id="datosMapa" style="display: inline; font-size: 12px"></div>
-	</div>
+		</div>
+			<div id="datosMapa" style="display: inline; font-size: 12px"></div>
+		</div>
+		<?php
+	}else{
+		?>
+		<!--<span><a class='nav-link' href='<?php echo RUTA_LOGIN; ?>'><i class='fa fa-sign-in' aria-hidden='true'></i> Login</a></span>
+		<a class='nav-link' style='display: inline;margin-left:20px' href='".RUTA_REGISTRO."'><i class='fa fa-registered' aria-hidden='true'></i> Registro</a>-->
+		<a class="btn btn-outline-secondary btn-sm " id="botonCentrarMapa" >Localizame</a>
+		<a class="btn btn-outline-secondary btn-sm " id="botonPosicionActual" style='display:none'></a>
+	
+	<?php
+	}
+	?>
+	
 	
 </div>
 
